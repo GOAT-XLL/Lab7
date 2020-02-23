@@ -102,5 +102,10 @@ public class Lab7 {
         helper.getPostWithMostLikedComments();
         
         helper.getPostWithMostComments();
+
+        //4). Top 5 inactive users based on total posts number.
+        AnalysisHelper.topInactiveFiveUsersBsedOnTotalPostsNumber();
+        //5). Top 5 inactive users based on total comments they created.
+        AnalysisHelper.topInactiveFiveUsersBasedOnTotalComments();
     }
 }

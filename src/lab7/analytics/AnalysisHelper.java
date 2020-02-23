@@ -120,4 +120,69 @@ public class AnalysisHelper {
         System.out.println("The post with most liked comments: ");
         System.out.println(mostCommentsId);
     }
+    //4). Top 5 inactive users based on total posts number.
+    static public void topInactiveFiveUsersBasedOnTotalPostsNumber() {
+        Map<User, Integer> userPostCount = new HashMap<>();
+        Map<Integer, User> users = DataStore.getInstance().getUsers();
+        Map<Integer, Post> posts = DataStore.getInstance().getPosts();
+        for (User user : users.values()) {
+            int postNumber = 0;
+            for (Post post : posts.values()) {
+                if (userPostCount.containsKey(user)) {
+                    postNumber = userPostCount.get(user);
+                }
+                if (post.getUserId() == user.getId()) {
+                    postNumber += 1;
+                    userPostCount.put(user, postNumber);
+                }
+
+            }
+        }
+        System.out.println("The top 5 inactive user based on total posts number");
+        for (int i = 0; i < 5; i++) {
+            int currentMin = 100000;
+            User maxUser = null;
+            for (User user : userPostCount.keySet()) {
+                if (userPostCount.get(user) < currentMin) {
+                    currentMin = userPostCount.get(user);
+                    maxUser = user;
+                }
+            }
+            System.out.println(maxUser + " " + currentMin);
+            userPostCount.remove(maxUser);
+        }
+    }
+
+    //5). Top 5 inactive users based on total comments they created.
+    static public void topInactiveFiveUsersBasedOnTotalComments() {
+        Map<User, Integer> userCommentCount = new HashMap<>();
+        Map<Integer, User> users = DataStore.getInstance().getUsers();
+        Map<Integer, Comment> comments = DataStore.getInstance().getComments();
+        for (User user : users.values()) {
+            int commentNumber = 0;
+            for (Comment comment : comments.values()) {
+                if (userCommentCount.containsKey(user)) {
+                    commentNumber = userCommentCount.get(user);
+                }
+                if (comment.getUserId() == user.getId()) {
+                    commentNumber += 1;
+                    userCommentCount.put(user, commentNumber);
+                }
+
+            }
+        }
+        System.out.println("The top 5 inactive user based on total comment created number");
+        for (int i = 0; i < 5; i++) {
+            int currentMin = 100000;
+            User maxUser = null;
+            for (User user : userCommentCount.keySet()) {
+                if (userCommentCount.get(user) < currentMin) {
+                    currentMin = userCommentCount.get(user);
+                    maxUser = user;
+                }
+            }
+            System.out.println(maxUser + " " + currentMin);
+            userCommentCount.remove(maxUser);
+        }
+    }
 }
