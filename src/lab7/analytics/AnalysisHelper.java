@@ -153,7 +153,7 @@ public class AnalysisHelper {
         }
     }
 
-    //5). Top 5 inactive users based on total comments they created.
+    //5) Top 5 inactive users based on total comments they created.
     static public void topInactiveFiveUsersBasedOnTotalComments() {
         Map<User, Integer> userCommentCount = new HashMap<>();
         Map<Integer, User> users = DataStore.getInstance().getUsers();
