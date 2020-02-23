@@ -185,4 +185,97 @@ public class AnalysisHelper {
             userCommentCount.remove(maxUser);
         }
     }
+    
+    //Top 5 inactive users overall (sum of comments, posts and likes)
+    public void topInactiveFiveUserBasedOnOverall() {
+        Map<User, Integer> userCount = new HashMap<>();
+        Map<Integer, User> users = DataStore.getInstance().getUsers();
+        Map<Integer, Comment> comments = DataStore.getInstance().getComments();
+        Map<Integer, Post> posts = DataStore.getInstance().getPosts();
+        for (User user : users.values()) {
+            int commentNumber = 0;
+            for (Comment comment : comments.values()) {
+                if (userCount.containsKey(user)) {
+                    commentNumber = userCount.get(user);
+                }
+                if (comment.getUserId() == user.getId()) {
+                    commentNumber += 1;
+                    commentNumber += comment.getLikes();
+                    userCount.put(user, commentNumber);
+                }
+            }
+        }
+        for (User user : users.values()) {
+            int postNumber = 0;
+            for (Post post : posts.values()) {
+                if (userCount.containsKey(user)) {
+                    postNumber = userCount.get(user);
+                }
+                if (post.getUserId() == user.getId()) {
+                    postNumber += 1;
+                    userCount.put(user, postNumber);
+                }
+
+            }
+        }
+        System.out.println("The top 5 inactive user based on overall");
+        for (int i = 0; i < 5; i++) {
+            int currentMin = 100000;
+            User maxUser = null;
+            for (User user : userCount.keySet()) {
+                if (userCount.get(user) < currentMin) {
+                    currentMin = userCount.get(user);
+                    maxUser = user;
+                }
+            }
+            System.out.println(maxUser + " " + currentMin);
+            userCount.remove(maxUser);
+        }
+    }
+    //Top 5 proactive users overall (sum of comments, posts and likes)
+    public void topPoractiveFiveUserBasedOnOverall() {
+        Map<User, Integer> userCount = new HashMap<>();
+        Map<Integer, User> users = DataStore.getInstance().getUsers();
+        Map<Integer, Comment> comments = DataStore.getInstance().getComments();
+        Map<Integer, Post> posts = DataStore.getInstance().getPosts();
+        for (User user : users.values()) {
+            int commentNumber = 0;
+            for (Comment comment : comments.values()) {
+                if (userCount.containsKey(user)) {
+                    commentNumber = userCount.get(user);
+                }
+                if (comment.getUserId() == user.getId()) {
+                    commentNumber += 1;
+                    commentNumber += comment.getLikes();
+                    userCount.put(user, commentNumber);
+                }
+            }
+        }
+        for (User user : users.values()) {
+            int postNumber = 0;
+            for (Post post : posts.values()) {
+                if (userCount.containsKey(user)) {
+                    postNumber = userCount.get(user);
+                }
+                if (post.getUserId() == user.getId()) {
+                    postNumber += 1;
+                    userCount.put(user, postNumber);
+                }
+
+            }
+        }
+        System.out.println("The top 5 proactive user based on overall");
+        for (int i = 0; i < 5; i++) {
+            int currentMin = 0;
+            User maxUser = null;
+            for (User user : userCount.keySet()) {
+                if (userCount.get(user) > currentMin) {
+                    currentMin = userCount.get(user);
+                    maxUser = user;
+                }
+            }
+            System.out.println(maxUser + " " + currentMin);
+            userCount.remove(maxUser);
+        }
+    }
 }
