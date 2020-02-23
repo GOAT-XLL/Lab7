@@ -104,6 +104,23 @@ public class AnalysisHelper {
         System.out.println(mostLikesId);
     }
     
+//    public void getPostWithMostLikedComments() {
+//        Map<Integer, Comment> comments = DataStore.getInstance().getComments();
+//        int mostLikesNum = 0;
+//        int mostLikesId = 0;
+//        
+//        for (Comment c : comments.values()) {
+//            
+//            if (c.getLikes() > mostLikesNum) {
+//                mostLikesNum = c.getLikes();
+//                mostLikesId = c.getPostId();
+//            }
+//        }
+//        
+//        System.out.println("The post with most liked comments: ");
+//        System.out.println(mostLikesId);
+//    }
+    
      //find the post with most comments
     public void getPostWithMostComments() {
         Map<Integer, Post> posts = DataStore.getInstance().getPosts();
