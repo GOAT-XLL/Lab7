@@ -92,7 +92,7 @@ public class Lab7 {
     }
     
     private void runAnalysis(){
-        // find user with Most Likes
+        // find users with Most Likes
         helper.userWithMostLikes();
         
         helper.getFiveMostLikedComment();
@@ -103,7 +103,7 @@ public class Lab7 {
         
         helper.getPostWithMostComments();
 
-        //4). Top 5 inactive users based on total posts number.
+        //4) Top 5 inactive users based on total posts number.
         AnalysisHelper.topInactiveFiveUsersBasedOnTotalPostsNumber();
         //5). Top 5 inactive users based on total comments they created.
         AnalysisHelper.topInactiveFiveUsersBasedOnTotalComments();
